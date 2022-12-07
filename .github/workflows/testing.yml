@@ -6,7 +6,7 @@ on:
   push:
 
 jobs:
-  deploy:
+  testing:
     runs-on: ubuntu-latest
 
     steps:
