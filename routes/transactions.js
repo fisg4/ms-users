@@ -5,8 +5,8 @@ const User = require('../models/User');
 router.get('/', async (req, res) => {
 
     try {
-        const Users = await User.find();
-        res.status(200).json(Users);
+        const users = await User.find();
+        res.status(200).json(users.map(user => user.cleanup()));
     } catch (err) {
         res.json({
             message: err
@@ -17,8 +17,8 @@ router.get('/', async (req, res) => {
 router.get('/:UserId', async (req, res) => {
 
     try {
-        const User = await User.findById(req.params.UserId);
-        res.status(200).json(User);
+        const user = await User.findById(req.params.UserId);
+        res.status(200).json(user);
     } catch (err) {
         res.json({
             message: err
@@ -28,14 +28,14 @@ router.get('/:UserId', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
-    const User = new User({
+    const user = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
     });
 
     try {
-        const savedUser = await User.save();
+        const savedUser = await user.save();
         res.status(201).json(savedUser);
     } catch (err) {
         res.json({

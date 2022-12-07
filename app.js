@@ -3,14 +3,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const port = (process.env.SERVER_PORT || 3000);
+const DB_URL = (process.env.DB_URL || 'mongodb://localhost/test')
 
 // Conexión con la BBDD
 
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/users');
+  await mongoose.connect(DB_URL);
 }
 
 // Middleware para extraer datos de peticiones entrantes
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 
 const transactionsRoute = require('./routes/transactions');
 
-app.use('/transactions', transactionsRoute);
+app.use('/users', transactionsRoute);
 
 // Home's endpoint
 

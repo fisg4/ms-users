@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const transactionSchema = new Schema({
+const userSchema = new Schema({
     username: {
         type: String,
         required: true
@@ -20,4 +20,13 @@ const transactionSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Transactions', transactionSchema);
+userSchema.methods.cleanup = function() {
+    return {
+        id: this._id,
+        username: this.username,
+        email: this.email,
+        insert: this.insert
+    }
+}
+
+module.exports = mongoose.model('User', userSchema);
