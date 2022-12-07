@@ -1,0 +1,23 @@
+name: Okteto Deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Okteto Login
+        uses: okteto/login@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: Okteto Deploy
+        uses: resinas/okteto-push@v1.0.2
+        with:
+          namespace: fastmusik-marmolpen3
+          build: true

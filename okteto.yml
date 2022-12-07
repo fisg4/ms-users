@@ -1,0 +1,13 @@
+build:
+  ms-users:
+    context: .
+
+deploy:
+  - helm upgrade --install ms-users chart
+    --set songs.image=${OKTETO_BUILD_MS_USERS_IMAGE}
+    --set usersMongoUrl=$USERS_DB_URL
+dev:
+  ms-songs:
+    command: npm start
+    sync:
+      - .:/app
