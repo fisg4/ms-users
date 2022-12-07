@@ -33,5 +33,5 @@ app.get('/', (req, res) => {
 // Configuración del puerto para el servidor de Express
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
+  console.log(`App listening on port ${port} and database ${DB_URL}`)
 });
