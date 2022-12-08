@@ -4,7 +4,8 @@
   "description": "API REST User service",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start-linux": "export $(cat .env | xargs) && nodemon app.js",
+    "start-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && npm start"
   },
   "keywords": [],
   "author": "Jose Antonio Z.A., Carlos N.A.",

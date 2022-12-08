@@ -22,16 +22,16 @@ app.use(bodyParser.json());
 
 const transactionsRoute = require('./routes/transactions');
 
-app.use('/users', transactionsRoute);
+app.use('/api/v1/users', transactionsRoute);
 
 // Home's endpoint
 
 app.get('/', (req, res) => {
-  res.send('Home')
+  res.send('watafaca')
 });
 
 // Configuración del puerto para el servidor de Express
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
+  console.log(`App listening on port ${port} and database ${DB_URL}`)
 });
