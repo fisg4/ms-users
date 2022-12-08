@@ -31,8 +31,8 @@ Integration
 2. External
 
 Installation
-* [Localhost](https://github.com/fisg4/ms-users/wiki/Installation#Localhost)
-* [Cloud](https://github.com/fisg4/ms-users/wiki/Installation#Cloud)
+* [Localhost](https://github.com/fisg4/ms-users/wiki/Installation#localhost)
+* [Cloud](https://github.com/fisg4/ms-users/wiki/Installation#cloud)
 
 <!-- CONTRIBUTING -->
 ## Contributing
