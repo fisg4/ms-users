@@ -35,6 +35,8 @@ Installation
 * [Localhost](https://github.com/fisg4/ms-users/wiki/Installation#localhost)
 * [Cloud](https://github.com/fisg4/ms-users/wiki/Installation#cloud)
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
