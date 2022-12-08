@@ -11,7 +11,9 @@
   "author": "Jose Antonio Z.A., Carlos N.A.",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "crypto": "^1.0.1",
     "express": "^4.17.3",
     "mongoose": "^6.8.0"
   },
