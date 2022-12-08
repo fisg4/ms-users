@@ -1,5 +1,18 @@
-# Users Microservice
-In charge of users management. Authentication & more.
+# Users MS
+Microservice of the FastMusik application, in charge of user management via API operations.
+
+# Documentation
+All relevant API usage documentation is defined in the Wiki section within the repository. Can be accesed through [here](https://github.com/fisg4/ms-users/wiki).
+
+Expect information about:
+
+API definition
+1. Entities
+2. CRUD
+Endpoints
+Integration 
+1. Internal
+2. External
 
 # Setup
 ## First thing first
