@@ -1,7 +1,10 @@
 # Users MS
-Microservice of the FastMusik APP, in charge of user management via API operations.
 
-### Built With
+<!-- ABOUT THE PROJECT -->
+## About The Project
+The User MS is responsible for managing all connection requests to the application for the authentication of personal data of the application users. Specifically, it will process user connections to maintain a history of their data, songs and reports.
+
+## Built With
 
 * [Node.JS](https://nodejs.org/)
 * [Express.JS](https://expressjs.com/)
@@ -11,10 +14,8 @@ Microservice of the FastMusik APP, in charge of user management via API operatio
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-# Documentation
-All relevant API usage documentation is defined in the Wiki section within the repository. Can be accesed through [here](https://github.com/fisg4/ms-users/wiki).
-
-Expect information about:
+## Documentation
+All relevant API usage documentation is defined in the Wiki section within the repository. Can be accesed through [here](https://github.com/fisg4/ms-users/wiki). Expect information about:
 
 API definition
 * [Entities](https://github.com/fisg4/ms-users/wiki/API-Definition#entities)
