@@ -9,7 +9,13 @@ Expect information about:
 API definition
 1. Entities
 2. CRUD
+
 Endpoints
+1. GET
+2. CREATE
+4. PUT
+5. DELETE
+
 Integration 
 1. Internal
 2. External
