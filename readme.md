@@ -17,8 +17,8 @@ All relevant API usage documentation is defined in the Wiki section within the r
 Expect information about:
 
 API definition
-1. Entities
-2. CRUD
+* [Entities](https://github.com/fisg4/ms-users/wiki/API-Definition#entities)
+* [CRUD](https://github.com/fisg4/ms-users/wiki/API-Definition#crud)
 
 Endpoints
 1. GET
@@ -27,8 +27,8 @@ Endpoints
 5. DELETE
 
 Integration 
-1. Internal
-2. External
+* [Internal](https://github.com/fisg4/ms-users/wiki/API-Definition#integration-with-internal-apis)
+* [External](https://github.com/fisg4/ms-users/wiki/API-Definition#integration-with-external-apis)
 
 Installation
 * [Localhost](https://github.com/fisg4/ms-users/wiki/Installation#localhost)
