@@ -1,5 +1,15 @@
 # Users MS
-Microservice of the FastMusik application, in charge of user management via API operations.
+Microservice of the FastMusik APP, in charge of user management via API operations.
+
+### Built With
+
+* [Node.JS](https://nodejs.org/)
+* [Express.JS](https://expressjs.com/)
+* [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+* [Docker](https://www.docker.com/)
+* [Okteto](https://www.okteto.com/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 # Documentation
 All relevant API usage documentation is defined in the Wiki section within the repository. Can be accesed through [here](https://github.com/fisg4/ms-users/wiki).
@@ -20,19 +30,23 @@ Integration
 1. Internal
 2. External
 
-# Setup
-## First thing first
-Run:
-``` 
-npm install
-``` 
-## DB connection
-For local development, you will need mongodb installed in your computer OR you can connnect to Mongo Atlas doing the following:
-1. Create the file ".env" in the root folder of the project
-2. Add the following line (ask mods for \<password>)
-``` 
-DB_URL="mongodb+srv://superuser:<password>@users-service.5nzx63g.mongodb.net/test"
-``` 
-3. Run "npm run start-linux" if you're on a UNIX environment or "npm run start-windows" if you're on Windows.
+Installation
+1. Localhost
+2. Okteto
 
-If you already have mongodb in your system, just run "npm start", but make sure the name of the db is "test".
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
