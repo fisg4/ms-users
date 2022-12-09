@@ -23,11 +23,10 @@ spec:
           image: {{ .Values.users.image }}
           env:
             - name: DB_URL
-            - valueFrom:
+              valueFrom:
                 secretKeyRef:
                   name: users-mongodb
                   key: users_db_url
-
           ports:
             - name: http
               containerPort: 3000
