@@ -10,6 +10,7 @@ RUN npm install
 COPY routes ./routes
 COPY models ./models
 COPY app.js .
+COPY swagger.json .
 
 EXPOSE 3000
 
