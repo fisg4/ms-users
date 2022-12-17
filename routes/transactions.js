@@ -47,14 +47,20 @@ router.post('/', async (req, res) => {
 router.put('/:UserId', async (req, res) => {
 
     try {
-        const updatedUser = await User.updateOne({ _id: req.params.UserId,
-        $set: {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        } });
+        // Utiliza el ID del usuario para identificar el usuario que deseas actualizar
+        const updatedUser = await User.updateOne({ _id: req.params.UserId },
+        // Establece los nuevos valores para los campos que deseas actualizar
+        {
+            $set: {
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
+            }
+        });
         res.status(200).json(updatedUser);
     } catch (err) {
+        // print error in console
+        console.log(err);
         res.json({
             message: err
         });
@@ -72,5 +78,28 @@ router.delete('/:UserId', async (req, res) => {
         });
     }
 });
+
+// login post endpoint
+router.post('/login', async (req, res) => {
+    try {
+        const user = await User.findOne ({ email: req . body . email });
+        if (user) {
+            // const validPassword = await bcrypt.compare(req.body.password, user.password);
+            const validPassword = req.body.password === user.password;
+            if (validPassword) {
+                res.status(200).json(user);
+            } else {
+                res.status(400).json({ message: 'Invalid password' });
+            }
+        } else {
+            res.status(400).json({ message: 'Invalid email' });
+        }
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
+
 
 module.exports = router;
