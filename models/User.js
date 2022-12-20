@@ -50,59 +50,24 @@ userSchema.methods.cleanup = function() {
     }
 }
 
-// userSchema.pre("save", function (next) {
-//     const user = this
-//     if (this.isModified("password") || this.isNew) {
-//       bcrypt.genSalt(10, function (saltError, salt) {
-//         if (saltError) {
-//           return next(saltError)
-//         } else {
-//           bcrypt.hash(user.password, salt, function(hashError, hash) {
-//             if (hashError) {
-//               return next(hashError)
-//             }
-  
-//             user.password = hash
-//             next()
-//           })
-//         }
-//       })
-//     } else {
-//       return next()
-//     }
-//   })
+userSchema.pre('save', function(next) {
+    if (!this.isModified('password')) {
+      return next();
+    }
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(this.password, salt);
+    this.password = hash;
+    next();
+});
 
-// // pre update middleware to hash password if password is modified
-// userSchema.pre("updateOne", function (next) {
-//   const password = this.getUpdate().password
-//   if (password) {
-//     bcrypt.genSalt(10, function (saltError, salt) {
-//       if (saltError) {
-//         return next(saltError)
-//       } else {
-//         bcrypt.hash(password, salt, function (hashError, hash) {
-//           if (hashError) {
-//             return next(hashError)
-//           }
-
-//           this.getUpdate().password = hash
-//           next()
-//         })
-//       }
-//     })
-//   } else {
-//     return next()
-//   }
-// })
-
-// // compare password
-// userSchema.methods.comparePassword = function (password, cb) {
-//   bcrypt.compare(password, this.password, function (err, isMatch) {
-//     if (err) {
-//       return cb(err)
-//     }
-//     cb(null, isMatch)
-//   })
-// }
+// compare password
+userSchema.methods.comparePassword = function (password, cb) {
+  bcrypt.compare(password, this.password, function (err, isMatch) {
+    if (err) {
+      return cb(err)
+    }
+    cb(null, isMatch)
+  })
+}
 
 module.exports = mongoose.model('User', userSchema);

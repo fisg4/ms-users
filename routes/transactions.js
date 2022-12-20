@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router();
+const bcrypt = require("bcryptjs")
+
 const User = require('../models/User');
 
 router.get('/', async (req, res) => {
@@ -45,27 +47,44 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:UserId', async (req, res) => {
-
     try {
-        // Utiliza el ID del usuario para identificar el usuario que deseas actualizar
-        const updatedUser = await User.updateOne({ _id: req.params.UserId },
-        // Establece los nuevos valores para los campos que deseas actualizar
-        {
-            $set: {
-                username: req.body.username,
-                email: req.body.email,
-                password: req.body.password
-            }
-        });
-        res.status(200).json(updatedUser);
+        if(req.body.password === undefined || req.body.password === null) {
+            const updatedUser = await User.updateOne(
+                { _id: req.params.UserId },
+                
+                {
+                  $set: {
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password
+                  }
+                }
+              );
+              res.status(201).json(updatedUser);
+        } else {
+            const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+            const updatedUser = await User.updateOne(
+              { _id: req.params.UserId },
+              
+              {
+                $set: {
+                  username: req.body.username,
+                  email: req.body.email,
+                  password: password
+                }
+              }
+            );
+            res.status(201).json(updatedUser);
+        }
+        
     } catch (err) {
-        // print error in console
-        console.log(err);
-        res.json({
-            message: err
-        });
+      // Print error in console
+      console.log(err);
+      res.json({
+        message: err
+      });
     }
-});
+  });
 
 router.delete('/:UserId', async (req, res) => {
 
