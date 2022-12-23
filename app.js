@@ -28,7 +28,7 @@ app.use('/api/v1/users', transactionsRoute);
 // Home's endpoint
 
 app.get('/', (req, res) => {
-  res.send('watafaca')
+  res.send('Home')
 });
 
 // Configuración del puerto para el servidor de Express
