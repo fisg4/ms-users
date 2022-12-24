@@ -16,9 +16,7 @@ jobs:
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
       - name: lst scrts
-        run: helm get secrets my-release
-      - name: list 2
-        run: helm get secrets my-release --all
+        run: helm secrets list
       - name: Okteto Deploy
         uses: resinas/okteto-push@v1.0.2
         with:
