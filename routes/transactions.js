@@ -33,7 +33,9 @@ router.post('/', async (req, res) => {
     const user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role,
+        plan: req.body.plan
     });
 
     try {
