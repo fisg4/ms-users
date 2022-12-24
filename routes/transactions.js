@@ -20,7 +20,7 @@ router.get('/:UserId', async (req, res) => {
 
     try {
         const user = await User.findById(req.params.UserId);
-        res.status(200).json(user);
+        res.status(200).json(user.cleanup());
     } catch (err) {
         res.json({
             message: err
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
         email: req.body.email,
         password: req.body.password,
         role: req.body.role,
-        plan: req.body.plan
+        plan: req.body.plan 
     });
 
     try {
