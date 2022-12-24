@@ -15,8 +15,10 @@ jobs:
         uses: okteto/login@latest
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
-      - name: List scrts
-        run: okteto secrets list
+      - name: lst scrts
+        run: helm get secrets my-release
+      - name: list 2
+        run: helm get secrets my-release --all
       - name: Okteto Deploy
         uses: resinas/okteto-push@v1.0.2
         with:
