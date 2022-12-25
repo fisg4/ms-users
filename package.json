@@ -1,6 +1,6 @@
 {
   "name": "api-rest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API REST User service",
   "main": "app.js",
   "scripts": {

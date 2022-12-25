@@ -28,7 +28,7 @@ app.use('/api/v1/users', transactionsRoute);
 // Home's endpoint
 
 app.get('/', (req, res) => {
-  res.send('Version: ')
+  res.send('Version: ' + process.env.npm_package_version)
 });
 
 // Configuración del puerto para el servidor de Express
