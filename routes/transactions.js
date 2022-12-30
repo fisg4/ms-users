@@ -104,12 +104,11 @@ router.delete('/:UserId', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne ({ email: req.body.email });
-        console.log(user)
         if (user) {
             const validPassword = await bcrypt.compare(req.body.password, user.password);
             // const validPassword = req.body.password === user.password;
             if (validPassword) {
-                res.status(200).json(user);
+                res.status(200).json(user.cleanup());
             } else {
                 res.status(400).json({ message: 'Invalid password' });
             }
@@ -122,6 +121,5 @@ router.post('/login', async (req, res) => {
         });
     }
 });
-
 
 module.exports = router;

@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
 
 const app = express();
-const port = (process.env.SERVER_PORT || 3000);
+const port = (process.env.SERVER_PORT || 3002);
 const DB_URL = (process.env.DB_URL || 'mongodb://localhost/test')
 
 // Conexión con la BBDD
@@ -22,8 +22,10 @@ app.use(bodyParser.json());
 
 // Importar rutas
 const transactionsRoute = require('./routes/transactions');
+const likeRoutes = require('./routes/integrations');
 
 app.use('/api/v1/users', transactionsRoute);
+app.use('/api/v1/users/likes', likeRoutes);
 
 // Home's endpoint
 
