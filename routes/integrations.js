@@ -35,13 +35,11 @@ router.post('/', async (req, res) => {
 
 // DELETE like to song /api/v1/likes
 router.delete('/:likeId', async (req, res) => {
-  console.log("delete like");
     try {
         passport.authenticate("jwt", { session: false })
         if (!req.params.likeId) {
           res.status(400).json({ message: 'Missing likeId' });
         }
-        console.log(req.body.likeId);
         const response = await fetch(songs_url_base + 'api/v1/likes/' + req.params.likeId, {
           method: 'DELETE',
           headers: {
