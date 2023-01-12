@@ -29,22 +29,27 @@ router.get('/:UserId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-
-    const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        role: req.body.role,
-        plan: req.body.plan 
-    });
-
-    try {
-        const savedUser = await user.save();
-        res.status(201).json(savedUser);
-    } catch (err) {
-        res.json({
-            message: err
+    email = req.body.email;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already in use' });
+    } else {
+        const user = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role,
+            plan: req.body.plan 
         });
+        
+        try {
+            const savedUser = await user.save();
+            res.status(201).json(savedUser);
+        } catch (err) {
+            res.json({
+                message: err
+            });
+        }
     }
 });
 

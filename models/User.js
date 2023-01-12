@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+var uniqueValidator = require('mongoose-unique-validator');
+
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -30,6 +32,8 @@ const userSchema = new Schema({
         default: Date.now
     }
 })
+
+userSchema.plugin(uniqueValidator);
 
 // only accept user or admin in role
 userSchema.path("role").validate(function (value) {
