@@ -27,6 +27,11 @@ spec:
                 secretKeyRef:
                   name: users-mongodb
                   key: users_db_url
+            - name: SONGS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hosts-secrets
+                  key: songs_host
           ports:
             - name: http
               containerPort: 3000
