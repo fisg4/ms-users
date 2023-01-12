@@ -55,38 +55,40 @@ router.post('/', async (req, res) => {
 
 router.put('/:UserId', async (req, res) => {
     try {
-        if(req.body.password === undefined || req.body.password === null) {
-            const updatedUser = await User.updateOne(
-                { _id: req.params.UserId },
-                
-                {
-                  $set: {
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password
-                  }
-                }
-              );
-              res.status(201).json(updatedUser);
+        email = req.body.email;
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          return res.status(400).json({ error: 'Email already in use' });
         } else {
-            const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-            const updatedUser = await User.updateOne(
-              { _id: req.params.UserId },
-              
-              {
-                $set: {
-                  username: req.body.username,
-                  email: req.body.email,
-                  password: password
-                }
-              }
-            );
-            res.status(201).json(updatedUser);
+            if(req.body.password === undefined || req.body.password === null || req.body.password === "") {
+                const updatedUser = await User.updateOne(
+                    { _id: req.params.UserId },
+                    
+                    {
+                      $set: {
+                        username: req.body.username,
+                        email: req.body.email,
+                      }
+                    }
+                  );
+                  res.status(201).json(updatedUser);
+            } else {
+                const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                const updatedUser = await User.updateOne(
+                  { _id: req.params.UserId },
+                  
+                  {
+                    $set: {
+                      username: req.body.username,
+                      email: req.body.email,
+                      password: password
+                    }
+                  }
+                );
+                res.status(201).json(updatedUser);
+            }
         }
-
     } catch (err) {
-      // Print error in console
-      console.log(err);
       res.json({
         message: err
       });
