@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon app.js",
     "start-linux": "export $(cat .env | xargs) && nodemon app.js",
-    "start-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && npm start"
+    "start-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && npm start",
+    "test": "export $(cat .env | xargs) && jest",
+    "test-integration": "export $(cat .env | xargs) && jest -c jest.integration.config.js"
   },
   "keywords": [],
   "author": "Jose Antonio Z.A., Carlos N.A.",
@@ -16,6 +18,8 @@
     "body-parser": "^1.20.0",
     "crypto": "^1.0.1",
     "express": "^4.17.3",
+    "jest": "^29.3.1",
+    "jest-extended": "^3.2.3",
     "mongoose": "^6.8.0",
     "mongoose-unique-validator": "^3.1.0",
     "passport": "^0.6.0",
