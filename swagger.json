@@ -1,24 +1,38 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "User API",
-        "version": "1.0.0",
+        "title": "MS Users API Docs",
+        "version": "1.1.0",
         "description": "API for managing users in FastMusik"
     },
     "servers": [
         {
-            "url": "http://localhost:3000",
+            "url": "http://localhost:3002",
             "description": "Local server"
         },
         {
-            "url": "https://users-fastmusik-marmolpen3.cloud.okteto.net/",
+            "url": "https://users-fastmusik-marmolpen3.cloud.okteto.net",
             "description": "Production server"
         }
     ],
     "paths": {
         "/api/{version}/users": {
             "get": {
+                "tags": [
+                    "User management"
+                  ],
                 "summary": "Retrieve all users",
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -36,7 +50,21 @@
                 }
             },
             "post": {
+                "tags": [
+                    "User management"
+                  ],
                 "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -65,8 +93,20 @@
         },
         "/api/{version}/users/{userId}": {
             "get": {
+                "tags": [
+                    "User management"
+                  ],
                 "summary": "Retrieve a single user",
                 "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "userId",
                         "in": "path",
@@ -94,8 +134,20 @@
                 }
             },
             "put": {
+                "tags": [
+                    "User management"
+                  ],
                 "summary": "Update an existing user",
                 "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "userId",
                         "in": "path",
@@ -135,8 +187,20 @@
                 }
             },
             "delete": {
+                "tags": [
+                    "User management"
+                  ],
                 "summary": "Delete an existing user",
                 "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "userId",
                         "in": "path",
@@ -159,7 +223,21 @@
         },
         "/api/{version}/users/login": {
             "post": {
+                "tags": [
+                    "User management"
+                  ],
               "summary": "Log in a user",
+              "parameters": [
+                {
+                    "name": "version",
+                    "in": "path",
+                    "description": "Version of the API",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
               "requestBody": {
                 "content": {
                   "application/json": {
@@ -200,7 +278,145 @@
                 }
               }
             }
-          }  
+          },
+          "/api/v1/users/likes/all": {
+            "get": {
+                "tags": [
+                    "Song Integration"
+                  ],
+                "summary": "Get all songs liked by a user",
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response, returns a list of songs liked by the user",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Song"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No songs liked by the user"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/likes/{likeId}": {
+            "post": {
+                "summary": "Create a new like for a song",
+                "tags": [
+                    "Song Integration"
+                  ],
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "songId": {
+                                        "type": "string"
+                                    },
+                                    "userId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["version", "songId", "userId"]
+                            }
+                        } }}},
+            "delete": {
+                "tags": [
+                    "Song Integration"
+                  ],
+                "summary": "Delete a like for a song",
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Version of the API",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "likeId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response, returns the deleted like"
+                    },
+                    "400": {
+                        "description": "Missing likeId"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Like not found"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            }
+        }
     },
     "components": {
         "schemas": {
@@ -249,7 +465,30 @@
                 "description": "The date and time when the user was created"
               }
             }
-          }
+          },
+          "Song": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "artist": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
         }
+        }
+        
       }    
 }
