@@ -8,7 +8,10 @@
     "start-linux": "export $(cat .env | xargs) && nodemon app.js",
     "start-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && npm start",
     "test": "export $(cat .env | xargs) && jest",
-    "test-integration": "export $(cat .env | xargs) && jest -c jest.integration.config.js"
+    "test-integration": "export $(cat .env | xargs) && jest -c jest.integration.config.js",
+    "build": "npm-run-all clean transpile",
+    "clean": "rimraf dist",
+    "transpile": "babel ./src --out-dir dist --copy-files"
   },
   "keywords": [],
   "author": "Jose Antonio Z.A., Carlos N.A.",
