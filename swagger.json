@@ -279,7 +279,7 @@
               }
             }
           },
-          "/api/v1/users/likes/all": {
+          "/api/{version}/users/likes/all": {
             "get": {
                 "tags": [
                     "Song Integration"
@@ -297,8 +297,8 @@
                     },
                     {
                         "name": "userId",
-                        "in": "query",
-                        "required": true,
+                        "in": "query", 
+                        "required": true, 
                         "type": "string"
                     }
                 ],
@@ -327,13 +327,19 @@
                 }
             }
         },
-        "/api/v1/users/likes/{likeId}": {
+        "/api/{version}/users/likes/{likeId}": {
             "post": {
                 "summary": "Create a new like for a song",
                 "tags": [
                     "Song Integration"
                   ],
                 "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    },
                     {
                         "name": "version",
                         "in": "path",
@@ -344,10 +350,13 @@
                         }
                     },
                     {
-                        "name": "Authorization",
-                        "in": "header",
+                        "name": "likeId",
+                        "in": "path",
+                        "description": "ID of the song to like",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -374,6 +383,12 @@
                 "summary": "Delete a like for a song",
                 "parameters": [
                     {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "version",
                         "in": "path",
                         "description": "Version of the API",
@@ -385,14 +400,11 @@
                     {
                         "name": "likeId",
                         "in": "path",
+                        "description": "ID of the song to remove like from",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
