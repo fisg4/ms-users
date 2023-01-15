@@ -70,14 +70,16 @@ router.post('/', async (req, res) => {
                         const savedUser = await user.save();
                         res.status(201).json(savedUser);
                     } catch (err) {
-                        res.json({
+                        res.status(500).json({
                             message: err
                         });
                     }
                 }
             }
           }).catch(function (error) {
-              console.error(error);
+            res.status(500).json({
+                message: err
+            });
           });
     } catch (err) {
         res.status(500).json({
@@ -90,11 +92,11 @@ router.put('/:UserId', async (req, res) => {
     try {
         const options = {
             method: 'GET',
-            url: badwordfilter,
+            url: badwordfilter_url,
             params: {text: "" + req.body.username + ", " + req.body.email + ""},
             headers: {
-              'X-RapidAPI-Key': xrapidkey,
-              'X-RapidAPI-Host': xrapidapihost
+              'X-RapidAPI-Key': badwordfilter_xrapidkey,
+              'X-RapidAPI-Host': badwordfilter_xrapidapihost
             }
           };
           
@@ -136,20 +138,20 @@ router.put('/:UserId', async (req, res) => {
                     }
                 }
             } catch (err) {
-              res.json({
-                message: err
-              });
+                res.status(500).json({
+                    message: err
+                });
             }
           }
           }).catch(function (error) {
-            console.error(error);
+            res.status(500).json({
+                message: err
+            });
         });
     } catch (err) {
-      // Print error in console
-      console.log(err);
-      res.status(500).json({
-        message: err
-      });
+        res.status(500).json({
+            message: err
+        });
     }
   });
 
@@ -179,7 +181,7 @@ router.post('/login', async (req, res) => {
             res.status(400).json({ message: 'Invalid email' });
         }
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: err
         });
     }
