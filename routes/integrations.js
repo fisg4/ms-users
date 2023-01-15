@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const passport = require('passport');
 
-const songs_url_base = (process.env.SONGS_HOST);
+const songs_url_base = process.env.SONGS_HOST + "/";
 
 // POST like to song /api/v1/likes
 

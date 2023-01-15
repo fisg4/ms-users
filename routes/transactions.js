@@ -20,9 +20,15 @@ router.get('/:UserId', async (req, res) => {
 
     try {
         const user = await User.findById(req.params.UserId);
-        res.status(200).json(user.cleanup());
+        if(!user){
+            res.status(404).json({
+                message: "User not found"
+            });
+        }else{
+            res.status(200).json(user.cleanup());
+        }
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: err
         });
     }
@@ -46,7 +52,7 @@ router.post('/', async (req, res) => {
             const savedUser = await user.save();
             res.status(201).json(savedUser);
         } catch (err) {
-            res.json({
+            res.status(500).json({
                 message: err
             });
         }
@@ -87,7 +93,7 @@ router.put('/:UserId', async (req, res) => {
     } catch (err) {
       // Print error in console
       console.log(err);
-      res.json({
+      res.status(500).json({
         message: err
       });
     }
@@ -99,7 +105,7 @@ router.delete('/:UserId', async (req, res) => {
         const removedUser = await User.deleteOne({ _id: req.params.UserId });
         res.status(200).json(removedUser);
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: err
         });
     }
