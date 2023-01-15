@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const axios = require("axios");
+
 // swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
@@ -30,7 +32,7 @@ app.use('/api/v1/users/likes', likeRoutes);
 // Home's endpoint
 
 app.get('/', (req, res) => {
-  res.send('Version: ' + process.env.npm_package_version)
+  res.send('Version: ' + process.env.npm_package_version + " - Songs url: " + process.env.SONGS_HOST)
 });
 
 // Configuración del puerto para el servidor de Express

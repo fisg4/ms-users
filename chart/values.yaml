@@ -2,3 +2,4 @@ users:
   replicaCount: 1
 
 usersMongoUrl: mongodb://localhost/test
+songsHost: required value
