@@ -6,9 +6,9 @@ const axios = require("axios");
 const User = require('../models/User');
 const { json } = require('body-parser');
 
-const badwordfilter = 'https://community-purgomalum.p.rapidapi.com/json';
-const xrapidapihost = 'community-purgomalum.p.rapidapi.com';
-const xrapidkey = '4ac446483cmsh72be9fe1b3a03f1p15c2dejsn63485dda4b87';
+const badwordfilter_url = 'https://community-purgomalum.p.rapidapi.com/json';
+const badwordfilter_xrapidapihost = 'community-purgomalum.p.rapidapi.com';
+const badwordfilter_xrapidkey = '4ac446483cmsh72be9fe1b3a03f1p15c2dejsn63485dda4b87';
 
 router.get('/', async (req, res) => {
 
@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:UserId', async (req, res) => {
-
     try {
         const user = await User.findById(req.params.UserId);
         res.status(200).json(user.cleanup());
@@ -35,19 +34,16 @@ router.get('/:UserId', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-
     try {
-
         const options = {
             method: 'GET',
-            url: badwordfilter,
+            url: badwordfilter_url,
             params: {text: "" + req.body.username + ", " + req.body.email + ""},
             headers: {
-              'X-RapidAPI-Key': xrapidkey,
-              'X-RapidAPI-Host': xrapidapihost
+              'X-RapidAPI-Key': badwordfilter_xrapidkey,
+              'X-RapidAPI-Host': badwordfilter_xrapidapihost
             }
           };
-          
           axios.request(options).then(async function (response) {
               if (JSON.stringify(response.data).includes("*")) {
                     res.status(401).json({ error: 'Bad words detected' });
@@ -64,7 +60,6 @@ router.post('/', async (req, res) => {
                         role: req.body.role,
                         plan: req.body.plan 
                     });
-                    
                     try {
                         const savedUser = await user.save();
                         res.status(201).json(savedUser);
@@ -78,13 +73,9 @@ router.post('/', async (req, res) => {
           }).catch(function (error) {
               console.error(error);
           });
-    
-
     } catch (err) {
-        res.status(400).json({ error: 'Quota reached' });
+        res.status(405).json({ error: 'Quota reached' });
     }
-
-
 });
 
 router.put('/:UserId', async (req, res) => {
@@ -124,8 +115,7 @@ router.put('/:UserId', async (req, res) => {
                     } else {
                         const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
                         const updatedUser = await User.updateOne(
-                          { _id: req.params.UserId },
-                          
+                          { _id: req.params.UserId },      
                           {
                             $set: {
                               username: req.body.username,
@@ -147,12 +137,11 @@ router.put('/:UserId', async (req, res) => {
             console.error(error);
         });
     } catch (err) {
-        res.status(400).json({ error: 'Quota reached' });
+        res.status(405).json({ error: 'Quota reached' });
     }
   });
 
 router.delete('/:UserId', async (req, res) => {
-
     try {
         const removedUser = await User.deleteOne({ _id: req.params.UserId });
         res.status(200).json(removedUser);
@@ -169,7 +158,6 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne ({ email: req.body.email });
         if (user) {
             const validPassword = await bcrypt.compare(req.body.password, user.password);
-            // const validPassword = req.body.password === user.password;
             if (validPassword) {
                 res.status(200).json(user.cleanup());
             } else {
