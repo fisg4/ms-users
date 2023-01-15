@@ -9,7 +9,7 @@ const swaggerDocument = require('./swagger');
 
 const app = express();
 const port = (process.env.SERVER_PORT || 3000);
-const DB_URL = (process.env.DB_URL || 'mongodb://localhost/test')
+const DB_URL = (process.env.DB_URL || 'mongodb+srv://superuser:superuser@users-service.5nzx63g.mongodb.net/users-testing')
 
 // Conexión con la BBDD
 main().catch(err => console.log(err));
@@ -40,3 +40,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`App listening on port ${port} and database ${DB_URL}`)
 });
+
+module.exports = app;
