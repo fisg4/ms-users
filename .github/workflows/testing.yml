@@ -6,7 +6,7 @@ on:
   workflow_call:
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -22,7 +22,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run start-linux &
+    - run: npm test
 
   integration:
     needs: build
