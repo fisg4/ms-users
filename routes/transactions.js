@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         const users = await User.find();
         res.status(200).json(users.map(user => user.cleanup()));
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: err
         });
     }
