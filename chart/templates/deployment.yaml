@@ -32,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: hosts-secrets
                   key: songs_host
+            - name: BADWORDFILTER_XRAPIDKEY
+              valueFrom:
+                secretKeyRef:
+                  name: xrapidkey
+                  key: badwordfilter_xrapidkey
           ports:
             - name: http
               containerPort: 3000

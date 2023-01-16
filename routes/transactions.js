@@ -8,7 +8,7 @@ const { json } = require('body-parser');
 
 const badwordfilter_url = 'https://community-purgomalum.p.rapidapi.com/json';
 const badwordfilter_xrapidapihost = 'community-purgomalum.p.rapidapi.com';
-const badwordfilter_xrapidkey = '4ac446483cmsh72be9fe1b3a03f1p15c2dejsn63485dda4b87';
+const badwordfilter_xrapidkey = process.env.BADWORDFILTER_XRAPIDKEY;
 
 router.get('/', async (req, res) => {
 
