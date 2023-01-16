@@ -7,6 +7,7 @@ deploy:
     --set users.image=${OKTETO_BUILD_MS_USERS_IMAGE}
     --set usersMongoUrl=$USERS_DB_URL
     --set songsHost=$SONGS_HOST
+    --set badWordFilterXRapidKey=$BADWORDFILTER_XRAPIDKEY
 dev:
   ms-users:
     command: npm start
