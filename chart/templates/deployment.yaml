@@ -35,7 +35,7 @@ spec:
             - name: BADWORDFILTER_XRAPIDKEY
               valueFrom:
                 secretKeyRef:
-                  name: xrapidkey
+                  name: badword-secrets
                   key: badwordfilter_xrapidkey
           ports:
             - name: http
