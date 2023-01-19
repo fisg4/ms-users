@@ -42,6 +42,11 @@ Como aspectos relevantes de la aplicación en general se tiene el despliegue en 
 
 El CA se puede encontrar directamente en la [aplicación desplegada](https://fastmusik-fastmusik-marmolpen3.cloud.okteto.net/customer-agreement)
 
+
+## Pricing
+
+El CA se puede encontrar directamente en la [aplicación desplegada](https://fastmusik-fastmusik-marmolpen3.cloud.okteto.net/pricing)
+
 ## Capacity analysis
 
 El análisis de la capacidad se puede encontrar [aquí](https://github.com/fisg4/client/wiki/An%C3%A1lisis-de-la-capacidad)
